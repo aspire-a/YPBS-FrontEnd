@@ -10,6 +10,10 @@ export default function Page() {
 
   const { data, error } = useSWR('/api/users/born-today', getFetcher);
 
+  if(error){
+    return <div>Not able to load User.</div>
+  }
+
   useEffect(() => {
     if(data){
       console.log(data)
