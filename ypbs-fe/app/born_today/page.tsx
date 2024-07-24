@@ -13,7 +13,7 @@ import { BORN_TODAY_PATH } from "../api_helper/URLs";
 export default function Page() {
   const [users, setUsers] = useState([]);
 
-  const { data, error } = useSWR(BORN_TODAY_PATH, getFetcher);
+  const { data, error } = useSWR(BORN_TODAY_PATH(), getFetcher);
 
   if(error){
     return <div>Not able to load User.</div>

@@ -1,6 +1,11 @@
 'use client';
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { DatagridFilters } from "./datagrid_filters";
+import { GET_USERS_WITH_FILTERS_PATH } from "../api_helper/URLs";
+import { getFetcher } from "../api_helper/fetchers";
+import { DataItems } from "./data_items";
+import { DataItemHeadings } from "./data_item_headings";
+
 
 export function Datagrid() {
     const [nameSurname, setNameSurname] = useState("");
@@ -10,17 +15,29 @@ export function Datagrid() {
     const [proje, setProje] = useState("");
     const [katki, setKatki] = useState("");
     const [takim, setTakim] = useState("");
+    const [users, setUsers] = useState([]);
+    const [clicked, setClicked] = useState(false);
+
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const data = await getFetcher(
+                    GET_USERS_WITH_FILTERS_PATH(nameSurname, unvan, gorev, birim, proje)
+                );
+                setUsers(data); 
+                console.log(data);
+            } catch (error) {
+                console.error("Error fetching data:", error);
+            }
+        };
+
+        fetchData();
+        
+    }, [clicked]); 
 
     function handleSearch() {
-        console.log("Searching with: ", nameSurname, unvan, gorev, birim, proje, katki, takim);
+        setClicked(!clicked);
     }
-
-    function fetchData(){
-        
-    }
-
-
-
 
     return (
         <div>
@@ -34,6 +51,16 @@ export function Datagrid() {
                 takim={takim} setTakim={setTakim}
                 handleSearch={handleSearch}
             />
+            <br/>
+            <DataItemHeadings/>
+            {users.map((user, index) => (<DataItems key={index} 
+                                                    nameSurname={user.nameSurname} 
+                                                    unvan={user.unvan}
+                                                    birim={user.birim}
+                                                    email={user.email}
+                                                    gorev={user.gorev}
+                                                    proje={user.proje}
+                                                    telefon={user.telefon}/>))}
         </div>
     )
 }

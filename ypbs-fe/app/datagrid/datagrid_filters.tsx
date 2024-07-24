@@ -1,55 +1,106 @@
+import React from 'react';
+import { Grid, Typography, Card, TextField, Button } from '@mui/material';
 
+export function DatagridFilters({ nameSurname, unvan, gorev, birim, proje, katki, takim, setNameSurname, setUnvan, setGorev, setBirim, setProje, setKatki, setTakim, handleSearch }) {
 
-export function DatagridFilters({nameSurname, unvan, gorev, birim, proje, katki, takim, setNameSurname, setUnvan, setGorev, setBirim, setProje, setKatki, setTakim, handleSearch}) {
+    const cardStyle = {
+        padding: '16px',
+        marginBottom: '16px',
+    };
+
+    const inputStyle = {
+        marginBottom: '16px',
+    };
+
+    const buttonStyle = {
+        marginTop: '16px',
+    };
 
     return (
-        <div>
-            <input 
-                type="text" 
-                placeholder="İsim Soyisim" 
-                value={nameSurname}
-                onChange={(e) => setNameSurname(e.target.value)}
-            />
-            <input
-                type="dropdown"
-                placeholder="Unvan"
-                value={unvan}
-                onChange={(e) => setUnvan(e.target.value)}
-            />
-            <input
-                type="dropdown"
-                placeholder="Görev"
-                value={gorev}
-                onChange={(e) => setGorev(e.target.value)}
-            />
-            <input
-                type="dropdown"
-                placeholder="Birim"
-                value={birim}
-                onChange={(e) => setBirim(e.target.value)}
-            />
-            <input
-                type="dropdown"
-                placeholder="Proje"
-                value={proje}
-                onChange={(e) => setProje(e.target.value)}
-            />
-            <input
-                type="dropdown"
-                placeholder="Katkı"
-                value={katki}
-                onChange={(e) => setKatki(e.target.value)}
-            />
-            <input
-                type="dropdown"
-                placeholder="Takım"
-                value={takim}
-                onChange={(e) => setTakim(e.target.value)}
-            />
-            <button onClick={handleSearch}> 
-                Sorgula 
-            </button>
-
-        </div>
-    )
+        <Card style={cardStyle}>
+            <Grid container spacing={2}>
+                <Grid item xs={1.5} >
+                    <TextField
+                        style={inputStyle}
+                        fullWidth
+                        label="İsim Soyisim"
+                        variant="outlined"
+                        value={nameSurname}
+                        onChange={(e) => setNameSurname(e.target.value)}
+                    />
+                </Grid>
+                <Grid item xs={1.5} >
+                    <TextField
+                        style={inputStyle}
+                        fullWidth
+                        label="Unvan"
+                        variant="outlined"
+                        value={unvan}
+                        onChange={(e) => setUnvan(e.target.value)}
+                    />
+                </Grid>
+                <Grid item xs={1.5} >
+                    <TextField
+                        style={inputStyle}
+                        fullWidth
+                        label="Görev"
+                        variant="outlined"
+                        value={gorev}
+                        onChange={(e) => setGorev(e.target.value)}
+                    />
+                </Grid>
+                <Grid item xs={1.5}>
+                    <TextField
+                        style={inputStyle}
+                        fullWidth
+                        label="Birim"
+                        variant="outlined"
+                        value={birim}
+                        onChange={(e) => setBirim(e.target.value)}
+                    />
+                </Grid>
+                <Grid item xs={1.5}>
+                    <TextField
+                        style={inputStyle}
+                        fullWidth
+                        label="Proje"
+                        variant="outlined"
+                        value={proje}
+                        onChange={(e) => setProje(e.target.value)}
+                    />
+                </Grid>
+                <Grid item xs={1.5}>
+                    <TextField
+                        style={inputStyle}
+                        fullWidth
+                        label="Katkı"
+                        variant="outlined"
+                        value={katki}
+                        onChange={(e) => setKatki(e.target.value)}
+                    />
+                </Grid>
+                <Grid item xs={1.5} >
+                    <TextField
+                        style={inputStyle}
+                        fullWidth
+                        label="Takım"
+                        variant="outlined"
+                        value={takim}
+                        onChange={(e) => setTakim(e.target.value)}
+                    />
+                </Grid>
+                <Grid item xs={1.5}>
+                    <Button
+                        style={buttonStyle}
+                        variant="contained"
+                        color="primary"
+                        fullWidth
+                        onClick={handleSearch}
+                    >
+                        Sorgula
+                    </Button>
+                </Grid>
+            </Grid>
+        </Card>
+    );
 }
