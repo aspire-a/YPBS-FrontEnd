@@ -7,6 +7,13 @@ import { DataItems } from "./data_items";
 import { DataItemHeadings } from "./data_item_headings";
 
 
+/**
+ * Şu anda sadece tek modda çalışıyor. Rehber ve anasayfa için iki ayrı mod yapılmalı.
+ * Katkı ve takım alanları eklenmeli (backend de eksik).
+ * Paging eklenmeli. Tek seferde tek page çekmeli.
+ * 
+ */
+
 export function Datagrid() {
     const [nameSurname, setNameSurname] = useState("");
     const [unvan, setUnvan] = useState("");
