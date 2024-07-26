@@ -5,6 +5,7 @@ import { GET_USERS_WITH_FILTERS_PATH } from "../api_helper/URLs";
 import { getFetcher } from "../api_helper/fetchers";
 import { DataItems } from "./data_items";
 import { DataItemHeadings } from "./data_item_headings";
+import { Box } from "@mui/material";
 
 
 /**
@@ -47,7 +48,7 @@ export function Datagrid() {
     }
 
     return (
-        <div>
+        <Box>
             <DatagridFilters 
                 nameSurname={nameSurname} setNameSurname={setNameSurname}
                 unvan={unvan} setUnvan={setUnvan}
@@ -67,7 +68,7 @@ export function Datagrid() {
                                                     email={user.email}
                                                     gorev={user.gorev}
                                                     proje={user.proje}
-                                                    telefon={user.telefon}/>))}
-        </div>
+                                                    telefon={user.telefon}/>))} 
+        </Box>
     )
 }

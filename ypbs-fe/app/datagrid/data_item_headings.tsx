@@ -18,6 +18,7 @@ export function DataItemHeadings() {
     return (
         <Card style={cardStyle}>
             <Grid container spacing={1} style={{width: "150%"}}>
+
                 <Grid item xs={2} style={headingItemStyle}>
                     <Typography variant="h5">Ad Soyad</Typography>
                 </Grid>
@@ -37,7 +38,6 @@ export function DataItemHeadings() {
                 <Grid item xs={1} style={headingItemStyle}>
                     <Typography variant="h5">Telefon</Typography>
                 </Grid>
-
 
             </Grid>
         </Card>
