@@ -2,8 +2,7 @@
 import { useEffect, useState } from "react";
 import { Datagrid } from "./datagrid";
 import DataGridDemo from "./datagrid_demo";
-import { getFetcher } from "../api_helper/fetchers";
-import { GET_USERS_WITH_FILTERS_PATH } from "../api_helper/URLs";
+import axios from "axios";
 
 export default function Page() {
     const [nameSurname, setNameSurname] = useState("");
@@ -19,10 +18,14 @@ export default function Page() {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const data = await getFetcher(
-                    GET_USERS_WITH_FILTERS_PATH(nameSurname, unvan, gorev, birim, proje)
-                );
-                setUsers(data); 
+                const data = await axios.get("api/users/get-users-with-filters"+
+                    "?nameSurname="+nameSurname +
+                    "&unvan="+unvan +
+                    "&gorev="+gorev +
+                    "&birim="+birim +
+                    "&proje="+proje 
+                )
+                setUsers(data.data); 
             } catch (error) {
                 console.error("Error fetching data:", error);
             }
