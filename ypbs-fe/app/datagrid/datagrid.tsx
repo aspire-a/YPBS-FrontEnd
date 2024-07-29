@@ -1,11 +1,10 @@
 'use client';
 import { useEffect, useState } from "react";
 import { DatagridFilters } from "./datagrid_filters";
-import { GET_USERS_WITH_FILTERS_PATH } from "../api_helper/URLs";
-import { getFetcher } from "../api_helper/fetchers";
 import { DataItems } from "./data_items";
 import { DataItemHeadings } from "./data_item_headings";
 import { Box } from "@mui/material";
+import axios from "axios";
 
 
 /**
@@ -14,6 +13,7 @@ import { Box } from "@mui/material";
  * Paging eklenmeli. Tek seferde tek page çekmeli.
  * 
  */
+
 
 export function Datagrid() {
     const [nameSurname, setNameSurname] = useState("");
@@ -29,11 +29,16 @@ export function Datagrid() {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const data = await getFetcher(
-                    GET_USERS_WITH_FILTERS_PATH(nameSurname, unvan, gorev, birim, proje)
-                );
-                setUsers(data); 
-                console.log(data);
+                const data = await axios.get("api/users/get-users-with-filters"
+                , {params : {
+                    nameSurname : nameSurname,
+                    unvan : unvan,
+                    gorev : gorev,
+                    birim : birim,
+                    proje : proje
+                }})
+                setUsers(data.data); 
+                console.log(data.data);
             } catch (error) {
                 console.error("Error fetching data:", error);
             }
