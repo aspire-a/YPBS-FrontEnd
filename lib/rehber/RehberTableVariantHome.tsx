@@ -9,6 +9,10 @@ import OpenInNewIcon from '@mui/icons-material/OpenInNew';
 
 interface RehberTableProps {
     users: GridRowsProp
+    page: number;
+    pageSize: number;
+    setPage: (page: number) => void;
+    setPageSize: (pageSize: number) => void;
 }
 
 const RehberTableVariantHome: React.FC<RehberTableProps> = ({ users }) => {

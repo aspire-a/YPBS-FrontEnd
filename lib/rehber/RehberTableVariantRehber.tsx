@@ -9,9 +9,13 @@ import OpenInNewIcon from '@mui/icons-material/OpenInNew';
 
 interface RehberTableProps {
     users: GridRowsProp
+    page: number;
+    pageSize: number;
+    setPage: (page: number) => void;
+    setPageSize: (pageSize: number) => void;
 }
 
-const RehberTableVariantRehber: React.FC<RehberTableProps> = ({ users }) => {
+const RehberTableVariantRehber: React.FC<RehberTableProps> = ({ users, page, pageSize, setPage, setPageSize}) => {
   const columns: GridColDef[] = [
       {
         field: 'avatar',
@@ -187,17 +191,34 @@ const RehberTableVariantRehber: React.FC<RehberTableProps> = ({ users }) => {
         ),
       },
     ];
+
+    const handlePageChange = (newPage: number) => {
+        setPage(newPage);
+    };
+
+    const handlePageSizeChange = (newPageSize: number) => {
+        setPageSize(newPageSize);
+        setPage(0); // Reset to the first page whenever the page size changes
+    };
   
     const getRowHeight = () => {
+      console.log(page,pageSize);
       return 'auto';
     };
     return(
         <Box sx={{height:"500px"}}>
             <DataGrid
-                rows={users}
+                rows={users?.content || []}
                 columns={columns}
                 getRowId={(row) => row.email}
                 getRowHeight={getRowHeight}
+                rowCount={users?.totalElements || 0}
+                page={page}
+                pageSize={pageSize}
+                pageSizeOptions={[5,10]}
+                paginationMode="server"
+                onPageChange={handlePageChange}
+                onPageSizeChange={handlePageSizeChange}
             />
         </Box>
     );

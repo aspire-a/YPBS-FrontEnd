@@ -7,12 +7,15 @@ import AutocompleteSelectBox from './AutocompleteSelectBox';
 import useSWR, { mutate } from 'swr';
 import axios from 'axios';
 import { GridRowsProp } from '@mui/x-data-grid';
+import { log } from 'console';
 
 interface RehberSearchBarProps {
     variant: string;
+    page: number;
+    pageSize: number;
 }
 
-const RehberSearchBar: React.FC<RehberSearchBarProps> = ({variant}) => {
+const RehberSearchBar: React.FC<RehberSearchBarProps> = ({variant, page, pageSize}) => {
     const [nameSurname, setNameSurname] = useState<string>('');
     const [unvan, setUnvan] = useState<string>('');
     const [gorev, setGorev] = useState<string>('');
@@ -29,7 +32,9 @@ const RehberSearchBar: React.FC<RehberSearchBarProps> = ({variant}) => {
             unvan,
             gorev,
             proje,
-            takim,
+            takim, 
+            page,
+            size : pageSize
           },
         });
         return response.data;
@@ -37,7 +42,7 @@ const RehberSearchBar: React.FC<RehberSearchBarProps> = ({variant}) => {
 
     useEffect(() => {
         mutate("/api/user/findUsersWithFilters");
-    }, [nameSurname, unvan, gorev, birim, proje, takim]);
+    }, [nameSurname, unvan, gorev, birim, proje, takim, page, pageSize]);
 
    
     return (
